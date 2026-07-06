@@ -9,29 +9,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
+          pip install pytest pytest-cov
 
       - name: Run tests with coverage
         run: |
           python -m pytest --cov=app --cov-report=xml
 
-      - name: Sonar Scan
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          pip install sonar-scanner
-          sonar-scanner \
-            -Dsonar.projectKey=python-kpi-demo \
-            -Dsonar.organization=<your-org> \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN \
+        with:
+          args: >
+            -Dsonar.projectKey=PrajaktaKatore_Test_Coverage_Delta_Repo
+            -Dsonar.organization=prajaktakatore
+            -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.python.coverage.reportPaths=coverage.xml
