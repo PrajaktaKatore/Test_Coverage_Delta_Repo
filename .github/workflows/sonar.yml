@@ -22,7 +22,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=app --cov-report=xml
+          python -m pytest --cov=app --cov-report=xml
 
       - name: Sonar Scan
         env:
