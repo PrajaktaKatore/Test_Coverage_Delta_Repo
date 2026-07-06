@@ -1,0 +1,37 @@
+name: Python CI + Sonar
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=app --cov-report=xml
+
+      - name: Sonar Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          pip install sonar-scanner
+          sonar-scanner \
+            -Dsonar.projectKey=python-kpi-demo \
+            -Dsonar.organization=<your-org> \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.python.coverage.reportPaths=coverage.xml
