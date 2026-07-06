@@ -35,3 +35,4 @@ jobs:
             -Dsonar.organization=prajaktakatore
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.baselineCoverage=25.4
