@@ -1,0 +1,11 @@
+{
+  "tools": {
+    "sonarqube": {
+      "baseUrl": "https://sonarcloud.io",
+      "token": "bff8a1b983716ddf0de73a40d5ef26984cf6c1be",
+      "organization": "prajaktakatore",
+      "projectKey": "PrajaktaKatore_Test_Coverage_Delta_Repo",
+      "baselineCoverage": 0
+    }
+  }
+}
